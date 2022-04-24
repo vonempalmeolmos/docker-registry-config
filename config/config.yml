@@ -12,7 +12,7 @@ http:
          key: "/certs/domain.key"
 auth:
       token:
-         realm: "https://dregistry.stormclouds.me:5001/auth"
+         realm: "https://domain.example.com:5001/auth"
          service: "Docker registry"
          issuer: "Docker Registry Auth Server"
          rootcertbundle: "/certs/fullchain.crt"
