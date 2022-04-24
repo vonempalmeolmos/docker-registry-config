@@ -1,0 +1,27 @@
+# A simple example. See reference.yml for explanation for explanation of all options.
+#
+
+server:
+  addr: ":5001"
+  certificate: "/certs/domain.crt"
+  key: "/certs/domain.key"
+
+token:
+  issuer: "Docker Registry Auth Server"  # Must match issuer in the Registry config.
+  expiration: 900
+
+users:
+  # Password is specified as a BCrypt hash. Use `htpasswd -nB USERNAME` to generate.
+  "admin":
+    password: "$2y$05$.Mxs4bnX0aTdHMeiJxMhGupOj4bsfcOg2JfXFTsjQodr8IMXs1F2K"
+  "": {}  # Allow anonymous (no "docker login") access.
+
+acl:
+  - match: {account: "admin"}
+    actions: ["*"]
+    comment: "Admin has full access to everything."
+  - match:
+      account: "" # Allow anonymous pull
+    actions: ["pull"]
+
+  # Access is denied by default.
